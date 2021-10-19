@@ -1,165 +1,105 @@
 # Phase 4 Project
 
-Final phase down -- you're absolutely crushing it! You've made it all the way through one of the toughest phase of this course. You must have an amazing brain in your head!
+Image Classification with Deep Learning
 
-<img src='https://raw.githubusercontent.com/learn-co-curriculum/dsc-phase-4-project/main/images/brain.gif'>
+## Introduction
 
-## Project Overview
+For my Flatiron School Phase 4 Project I will be classifying x-ray images of pediatric patients to determine whether they have pneumonia or not. Pneumonia is an imflammatory condition in the lungs that affects small air sacs known as alveoli. Pneumonia can be caused by viruses, bacteria, and occasionaly other microorganisms such as fungi and parasites. Symptoms typically include cough, chest pain, fever, and difficulty breathing. Pneumonia affects everyone differently, but children, the elderly, and those with pre existing health conditions are the most at risk. Diagnosing pneumonia using traditional physical exams can be difficult so chest x-rays are commonly used, but interpreting chest x-rays can be difficult as well due to the the locality and severity of the case determining whether it is distinguishable by the naked eye or not. Pneumonia affects roughly 450 million people globally per year and results in around 4 million deaths per year. Antibiotics and vaccines have greatly improved survival rates, but pneumonia is still considered a leading cause of death in many developing countries. The economic costs associated with pneumonia are debated with estimates ranging from $27 billion per year globally, up to almost $20 billion per year just in the United States. The average hospital charges for treating pneumonia in the US are around $25,000 and as high as $125,000, and the average emergency room visit for pneumonia costs $950. A robust deep learning model that can classify x-rays with high accuracy has many potentially beneficial applications. To medical personal in assisting to diagnose pneumonia cases, it could reduce their time spent analyzing radiographic images. To patients, as an earlier diagnosis may lead to an improved outcome and less time sick. And also to hospital administrators and insurance companies, as detecting and treating pneumonia cases earlier and more efficiently could save lives, time, and resources. 
 
-For this phase, you will choose a project that requires building one of these four models:
+The data used for this project was collected and made available by Kermany et all via [Mendeley Data] (https://data.mendeley.com/datasets/rscbjbr9sj/3) and was downloaded from [Kaggle]. (https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia)
 
-- Time Series Modeling
-- Recommendation System
-- Image Classification with Deep Learning
-- Natural Language Processing
+## Technologies
+* The data cleaning, organizing, and modeling for this project can be found in the jupyter notebook titled "Phase4Project", it is located in this page's repo and was created using Python 3.7.6
+* There is a keynote presentation for non-technical audiences available under the file name "Phase4Presentation.pdf"
 
-### The Data
+### Necessary libraries to reproduce and run this project are:
 
-We have provided a dataset suitable to each model, but you are also encouraged to source your own dataset. If you choose your own dataset, **run the dataset and business problem by your instructor for approval** before starting your project.
+*OS
+*CV2
+*Pandas
+*NumPy
+*MatPlotLib
+*Seaborn
+*SKLearn
+*Keras
+*Tensorflow
 
-### How to Choose a Project
+## Objectives
 
-When choosing a project, consider:
+* Explore and analyze dataset using visualizations to identify image and label distributions as well as image examples.
+* Preprocess images using normalization and augmentation techniques.
+* Model the image data using convolutional neural networks. Iterate through a baseline model, a regularized model, and a model built using transfer learning.
+* Validate model performance by making label predictions and evaluating predictions against the test data. Explain the strengths and weaknesses of the model's predictive power. 
 
-1. **Depth:** Choose a project that similar to what you want to do for your capstone project (Phase 5). This will allow you to practice those methods in a group setting before needing to use it independently. This will help you build a better Capstone project and a portfolio that demonstrates the ability to deeply learn and implement one modeling approach.
+## Methodology
 
-2. **Breadth:** Choose a problem that you don't necessarily plan to use in your capstone project. This will allow you to develop applied experience with multiple modeling approaches. This will help you refine your areas of interest and build a portfolio that demonstrates the ability to learn and implement multiple modeling approaches.
+A neural network is a computing system inspired by biological neural functions in animal brains. They are composed of a system of nodes (neurons) that send signals from a given input in the form of linear functions back and forth to generate an output represented as a function of the sum of the inputs. The architecture of a neural network is defined by the the number of neurons in a layer, and the number of layers in the network. A neural network comprised of multiple layers is known as a multi layer perceptron (MLP). The amount of layers per network and neurons per layer is problem specific and the there is no definitive standard for their configuration, as each problem requires experience and experimentation from the practitioner engaged in modeling a problem. Once a network is provided information it uses a user specified activation function to connect the neurons (data features) and calculate their weights and biases. Once the weights are calculated with the goal of generating a probability for each data observation and its label, a cost function using gradient descent attemps to minimize an error rate by optimizing the weights and biases through a series of forward and backward propogation. During propagation gradient derivatives are used to calculate the difference between the calculated and desired outcome (known as error) and this is repeated until a local or global minima is reached. The summary of all errors is known as loss and the objective of the model is to minimize loss while maximizing a specific evaluation metric, which is accuracy for this problem of image classification. 
 
-If you are feeling overwhelmed or behind, we recommend you choose Problem \#3: Image Classification with Deep Learning.
+Convolutional neural networks (CNN's) are deep neural networks that specialize in processing image data by assigning weights and biases to specific features in the image that differentiate it from other images. They are initialized with a densely connected layer and then multiple convolved and pooling layers are stacked and a final dense layer is added at the end to learn the decision function based on the convolved and transformed informative inputs. 
 
-### Problem 1: Time Series Modeling
+Images are represented by three dimensional tensors with each matrix of the tensor corresponding to a color (Red, Green, Blue) and each cell in the matrix containing a pixel value. Processing the amount of information contained in an image, especially a high resolution image, would generate an exponential explosion of parameters and weights that would be far too computationally intensive for any conventional computer to process. The solution to this problem is the implementation of convolutional and pooling layers. Convolutional layers pass a smaller matrix filter over the image tensor and use matrix multiplication to generate a new lower dimension feature output. The lower dimension feature output is then passed to a pooling layer which reduces the spatial size of the convolved feature. The convolutional layer finds the borders and shapes of the image and then the pooling layer takes the summary of the convolutions and down samples them into lower dimensional representations that are computationally viable. Together the convolutional and pooling layers are able to extract low and high level features from the image while at the same time reducing dimensionality. Before being passed to the densely connected output layer the images are flattened into a column vector, and the flattened output is finally fed into a feed-forward neural network.  
 
-If you choose the Time Series option, you will be forecasting real estate prices of various zip codes using data from [Zillow Research](https://www.zillow.com/research/data/). For this project, you will be acting as a consultant for a fictional real-estate investment firm. The firm has asked you what seems like a simple question:
+The convolutional neural network will take a training collection (images pre-labeled as Normal or Pneumonia) as input, transform their information into a proccesable format, and then form a probability weighted association between the image information and a label. Once the model is configured, compiled, and fit, it will be fed images with no attached label and will use the features learned in training to generate a predicted label. The predictions will then be evaluated and the number of correctly predicted labels divided by the total number of images in the testing dataset will be the models accuracy. 
 
-> What are the top 5 best zip codes for us to invest in?
+## Table of Contents
 
-This may seem like a simple question at first glance, but there's more than a little ambiguity here that you'll have to think through in order to provide a solid recommendation. Should your recommendation be focused on profit margins only? What about risk? What sort of time horizon are you predicting against?  Your recommendation will need to detail your rationale and answer any sort of lingering questions like these in order to demonstrate how you define "best".
+*[Exploratory Data Analysis](#EDA)
+*[Preprocessing](#Process)
+*[Modeling](#Models)
+*[Conclusions](#End)
 
-There are many datasets on the [Zillow Research Page](https://www.zillow.com/research/data/), and making sure you have exactly what you need can be a bit confusing. For simplicity's sake, we have already provided the dataset for you in this repo -- you will find it in the file `time-series/zillow_data.csv`.
+<a name="EDA"></a> 
+### Exploratory Data Analysis
 
-The goal of this project is to have you complete a very common real-world task in regard to time series modeling. However, real world problems often come with a significant degree of ambiguity, which requires you to use your knowledge of statistics and data science to think critically about and answer. While the main task in this project is time series modeling, that isn't the overall goal -- it is important to understand that time series modeling is a tool in your toolbox, and the forecasts it provides you are what you'll use to answer important questions.
+I used simple bar plots to inspect the distribution of labels among the data, and a simple plotting method to inspect example images from the dataset. The provided dataset is comprised of 5,216 training images, 16 validation images, and 624 testing images. The training images are divided into around 25% normal x-rays and close to 75% containing pneumonia, and the testing images are divided into about 35% normal x-rays and 65% containing pneumonia. 
 
-In short, to pass this project, demonstrating the quality and thoughtfulness of your overall recommendation is at least as important as successfully building a time series model!
+pic
 
-#### Starter Jupyter Notebook
+Having an asymmetrical distribution of label examples is known as class imbalance and often leads to a model that over-fits to the over represented class. The partitioning of train/validate/test sample sizes is a problematic distribution as well, as an ideal dataset is composed of approximately 70-80% training data, 10-15% validation, and 10-15% testing. I attempted modeling the data in the provided distribution to gauge baseline model performance, and then discarded the provided validation set and generated a proportional validation set using the training data afterwards. 
 
-For this project, you will be provided with a Jupyter notebook, `time-series/starter_notebook.ipynb`, containing some starter code. If you inspect the Zillow dataset file, you'll notice that the datetimes for each sale are the actual column names -- this is a format you probably haven't seen before. To ensure that you're not blocked by preprocessing, we've provided some helper functions to help simplify getting the data into the correct format. You're not required to use this notebook or keep it in its current format, but we strongly recommend you consider making use of the helper functions so you can spend your time working on the parts of the project that matter.
+<a name="Process"></a>
+### Preprocessing
 
-#### Evaluation
+The images provided in the downloadable dataset were color images which generally have much higher pixel density and values that can be computationally expensive and slow to process if not using an advanced GPU or powerful cloud server. Neural networks process normalized data much faster and converge to a stable solution more frequently using normalized data as well so I manually normalized the images by rescaling them into a 256 pixel format. 
 
-In addition to deciding which quantitative metric(s) you want to target (e.g. minimizing mean squared error), you need to start with a definition of "best investment".  Consider additional metrics like risk vs. profitability, or ROI yield.
+Many popular and accurate CNN's were build using several tens to hundreds of thousands of images so the roughly six thousand images provided in this dataset is considered sparse. Neural networks are a very data intensive modeling method and the more data and more variance in the data the stronger your model will be and less likely it is that the model will over-fit to the training examples. The Keras library provides a tool for image processing called 'ImageDataGenerator' that allows you to augment your images by rotating, zooming, shifting, shearing, and flipping them, which can provided several variants of the same image in your data providing synthetic variance that helps your model distinguish differences among images. After modeling the dataset in its provided format I augmented the images using 'ImageDataGenerator' and re-fit them again with the augmented images.
 
-### Problem 2: Recommendation System
+<a name="Models"></a>
+### Modeling 
 
-If you choose the Recommendation System option, you will be making movie recommendations based on the [MovieLens](https://grouplens.org/datasets/movielens/latest/) dataset from the GroupLens research lab at the University of Minnesota.  Unless you are planning to run your analysis on a paid cloud platform, we recommend that you use the "small" dataset containing 100,000 user ratings (and potentially, only a particular subset of that dataset).
+Working on a data science project is an iterative process that involves recursively making changes to your preprocessing and feature selection techniques, as well as your modeling techniques, in an effort to optimize the model to give you the best performance. Neural networks can be more difficult to fine tune than other modeling techniques due to the unsupervised nature of the hidden layers and inability to use grid searches to find optimal hyper-parameter values. Neural network architecture contains many tuneable hyper-parameters such as number of layers and neurons, activation functions, loss functions, algorithm optimizers, learning rates,  evaluation metrics, and regularization techniques and values. Given the many possible combinations of hyper-parameters I decided to initialize one configuration of layers and neurons and hold that configuration as well as the activation and loss functions, optimizer, learning rate, and evaluation metric constant in an attempt to more accurately assess the data augmentation, distributions, pixel size, and regularization techniques as explanatory variables for model performance. The caveat to the listed configuration was an attempt at transfer learning at the end of the modeling phase. These decisions were made due the time and hardware constraints I was working under throughout the duration of the project as the fitting portion during modeling is very time consuming, and because my personal priority when approaching this project was to learn about and understand as much of the modeling process and hyper-parameter relationships as possible as oposed to producing as optimal of scores as possible.
 
-Your task is to:
+My model infrastruce consists of a CNN with 4 hidden layers, each with different values of neurons, the rectified linear unit (ReLu) activation function for all layers except the output layer which is a sigmoid function which outputs a value between 0-1 and is necessary for a binary classification. I used the adaptive moment estimation (AdaM) convergence algorithm due to its popularity and being suggested in many research articles. I implemented a fixed 0.001 learning rate in order to help isolate the explanatory variables I listed above, and I used binary cross-entropy and the loss function and accuracy as the evaluation metric due to suggestions from educational literature. 
 
-> Build a model that provides top 5 movie recommendations to a user, based on their ratings of other movies.
+I began modeling using the provided dataset in the format it was downloaded with only 16 validation examples. I first modeled it with no augmentation or regularization and it returned an accuracy of 74.03% and a loss of 200.31%. I then added augmentation with no regularization and that model improved drastically to 89.90% accuracy and 26.77% loss. Next I added a 20% dropout regularization to 3 layers which yielded 90.22% accuracy and 27% loss. I began modeling with a 150x150 image size and then modeled 256x256 to compare outcomes. The larger pixel size returned a reduced score of 87.50% accuracy and 31.42% loss. 
 
-The MovieLens dataset is a "classic" recommendation system dataset, that is used in numerous academic papers and machine learning proofs-of-concept.  You will need to create the specific details about how the user will provide their ratings of other movies, in addition to formulating a more specific business problem within the general context of "recommending movies".
+pic
 
-#### Collaborative Filtering
+The next iteration of modeling involved disgarding the included validation data and generating a more proportional validation set using the Keras 'ImageDataGenerator' 'validation_split' argument. I generated a 20% validation set out of the training set which gave me 4,173 training examples, 1,043 validation, and the testing set of 624 images was not changed. Due to the improved performance of adding dropout regularization in the first modeling iteration I began with that same configuration which returned 91.50% accuracy and 30.71% loss. A slight improvement in accuracy and an increase in loss, so not a performance increase overall. I then modeled the same configuration again using the 256X256 pixel size and perfprmance decreased to 81.41% accuracy and 38.47% loss. 
 
-At minimum, your recommendation system must use collaborative filtering.  If you have time, consider implementing a hybrid approach, e.g. using collaborative filtering as the primary mechanism, but using content-based filtering to address the [cold start problem](https://en.wikipedia.org/wiki/Cold_start_(computing)).
+pic
 
-#### Evaluation
 
-The MovieLens dataset has explicit ratings, so achieving some sort of evaluation of your model is simple enough.  But you should give some thought to the question of metrics. Since the rankings are ordinal, we know we can treat this like a regression problem.  But when it comes to regression metrics there are several choices: RMSE, MAE, etc.  [Here](http://fastml.com/evaluating-recommender-systems/) are some further ideas.
+The last iteration using the same model configuration I'd used with the previous models included an added L1 and L2 (weight decay) regularization parameter in the last convolved layer. L1 and L2 regularization add a penalty parameter to the cost function that keeps the weights from growing too large and forces the network to be more simple. The goal of adding regularization is to reduce over-fitting of the training data and increase how much the model is able to generalize to the testing data. Adding a L1 parameter returned an accuracy of % and a loss of %, and adding a L2 parameter returned an accuracy of % and a loss of %.
 
-### Problem 3: Image Classification with Deep Learning
+pic
 
-If you choose this option, you'll put everything you've learned together to build a deep neural network that trains on a large dataset for classification on a non-trivial task.  In this case, using x-ray images of pediatric patients to identify whether or not they have pneumonia.  The dataset comes from Kermany et al. on [Mendeley](https://data.mendeley.com/datasets/rscbjbr9sj/3), although there is also a version on [Kaggle](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia) that may be easier to use.
+My final modeling iteration was an attempt at transfer learning. Transfer learning is a machine learning method that uses the architecture and parameters of a previously trained model on a new dataset. Pretrained models can be very effective with smaller datasets like the one I was working with, especially in the context of predictive modeling problems that use image data as input. I used the InceptionV3 pretrained model from Keras and added a new densely connected layer on top of the output. There are two different methods you can implement with pre-trained models. The first is to use the pre-trained model as a feature extractor; in this instance you freeze the pre-trained models convolutional blocks so that their weights aren't updated after each training epoch. The second is to use the pre-trained model as a fine tuner, in this instance you unfreeze however many blocks youd like and once unfrozen those layers weights will be updated with backpropagation in each training epoch, this usually requires reducing the learning rate to avoid getting stuck at a local minima, and can increase training time by a large factor. I implemented the first instance of transfer learning and froze all trainable blocks and added one initially, and then two additional densely connected layers with 20% dropout. I first added an L1 penalty parameter which was then followed by adding an L2 penalty parameter. The first model with only dropout regularization returned an accuracy of 88.94% and a loss of 29.75%. After adding L1 and L2 penalties the accuracy dropped to 86.38% and the loss increased to 40.30%. 
 
-Your task is to:
+<a name="End"></a>
+### Model Evaluation and Conclusions
 
-> Build a model that can classify whether a given patient has pneumonia, given a chest x-ray image.
+The best performing model I was able to construct was the synthetic generated validation set iteration with data augmentation and dropout regularization applied. This model returned 92% accuracy and 31% loss. To get a better idea of the models strengths and weaknesses I generated predictions and then evaluated those predictions using a confusion matrix and classification report. Precision was the model's weakness as it scored 81.20%. It predicted 190 cases of pneumonia accurately out of 234 total pneumonia predictions giving us 44 false positives, meaning those 44 images were predicted to have pneumonia but did not. The model's strength was recall, which was 95.48%. The model correctly identified 190 out of 199 cases of pneumonia, which left us with 9 false negatives, cases of pneumonia that were classified as normal. In the context of solving a classification for this particular dataset, we would much prefer a false positive to a false negative because the consequences of having pneumonia and the model predicting the image as normal are much more severe than predicting pneumonia that isn't there. Further attemps to improve this model should prioritize optimizing the recall to reduce the number of pneumonia cases classified as normal. 
 
-#### Aim for a Proof of Concept
+This project was a great introduction to neural networks and image classification, and given the time and processing constraints I was working under I am very pleased with the outcome. As mentioned previously there are many hyper parameters to tune in the configuration, augmentation, and regularization of neural networks which gives you an exponential number of possible outcomes. I look forward to learning more about neural networks in the future and how to optimize them for the best performance. If I had more time with this project I would have liked to model a range of learning rates to compare their impact on model runtimes and performance, and I would have liked to attempt more transfer learning models as feature extractors and fine tuners. 
 
-With Deep Learning, data is king -- the more of it, the better. However, the goal of this project isn't to build the best model possible -- it's to demonstrate your understanding by building a model that works. You should try to avoid datasets and model architectures that won't run in reasonable time on your own machine. For many problems, this means downsampling your dataset and only training on a portion of it. Once you're absolutely sure that you've found the best possible architecture and other hyperparameters for your model, then consider training your model on your entire dataset overnight (or, as larger portion of the dataset that will still run in a feasible amount of time).
+## Resources
 
-At the end of the day, we want to see your thought process as you iterate and improve on a model. A project that achieves a lower level of accuracy but has clearly iterated on the model and the problem until it found the best possible approach is more impressive than a model with high accuracy that did no iteration. We're not just interested in seeing you finish a model -- we want to see that you understand it, and can use this knowledge to try and make it even better!
-
-#### Evaluation
-
-Evaluation is fairly straightforward for this project.  But you'll still need to think about which metric to use and about how best to cross-validate your results.
-
-### Problem 4: Natural Language Processing (NLP)
-
-If you choose this option, you'll build an NLP model to analyze Twitter sentiment about Apple and Google products. The dataset comes from CrowdFlower via [data.world](https://data.world/crowdflower/brands-and-product-emotions). Human raters rated the sentiment in over 9,000 Tweets as positive, negative, or neither.
-
-Your task is to:
-
-> Build a model that can rate the sentiment of a Tweet based on its content.
-
-#### Aim for a Proof of Concept
-
-There are many approaches to NLP problems - start with something simple and iterate from there. For example, you could start by limiting your analysis to positive and negative Tweets only, allowing you to build a binary classifier. Then you could add in the neutral Tweets to build out a multiclass classifier. You may also consider using some of the more advanced NLP methods in the Mod 4 Appendix.
-
-#### Evaluation
-
-Evaluating multiclass classifiers can be trickier than binary classifiers because there are multiple ways to mis-classify an observation, and some errors are more problematic than others. Use the business problem that your NLP project sets out to solve to inform your choice of evaluation metrics.
-
-### Sourcing Your Own Data
-
-Sourcing new data is a valuable skill for data scientists, but it requires a great deal of care. An inappropriate dataset or an unclear business problem can lead you spend a lot of time on a project that delivers underwhelming results. The guidelines below will help you complete a project that demonstrates your ability to engage in the full data science process.
-
-Your dataset must be...
-
-1. **Appropriate for one of this project's models.** These are time series, recommendation systems, deep learning, or natural language processing.   
-
-2. **Usable to solve a specific business problem.** This solution must rely on your model.
-
-3. **Somewhat complex.** It should contain thousands of rows and features that require creativity to use.
-
-4. **Unfamiliar.** It can't be one we've already worked with during the course or that is commonly used for demonstration purposes (e.g. MNIST).
-
-5. **Manageable.** Stick to datasets that you can model using the techniques introduced in Phase 4.
-
-Once you've sourced your own dataset and identified the business problem you want to solve with it, you must to **run them by your instructor for approval**.
-
-#### Problem First, or Data First?
-
-There are two ways that you can source your own dataset: **_Problem First_** or **_Data First_**. The less time you have to complete the project, the more strongly we recommend a Data First approach to this project.
-
-**_Problem First_**: Start with a problem that you are interested in that you could potentially solve using one of the four project models. Then look for data that you could use to solve that problem. This approach is high-risk, high-reward: Very rewarding if you are able to solve a problem you are invested in, but frustrating if you end up sinking lots of time in without finding appropriate data. To mitigate the risk, set a firm limit for the amount of time you will allow yourself to look for data before moving on to the Data First approach.
-
-**_Data First_**: Take a look at some of the most popular internet repositories of cool data sets we've listed below. If you find a data set that's particularly interesting for you, then it's totally okay to build your problem around that data set.
-
-There are plenty of amazing places that you can get your data from. We recommend you start looking at data sets in some of these resources first:
-
-* [UCI Machine Learning Datasets Repository](https://archive.ics.uci.edu/ml/datasets.php)
-* [Kaggle Datasets](https://www.kaggle.com/datasets)
-* [Awesome Datasets Repo on Github](https://github.com/awesomedata/awesome-public-datasets)
-* [Tensorflow Datasets](https://www.tensorflow.org/datasets/catalog/overview)
-
-## The Deliverables
-
-There are three deliverables for this project:
-
-* A **GitHub repository**
-* A **Jupyter Notebook**
-* A **non-technical presentation**
-
-Review the "Project Submission & Review" page in the "Milestones Instructions" topic for instructions on creating and submitting your deliverables. Refer to the rubric associated with this assignment for specifications describing high-quality deliverables.
-
-### Key Points
-
-* **Choose your project quickly.** We've given you a lot of choices - don't get stuck spending too much time choosing which project to do. Give yourself a firm time limit for picking a project (e.g. 2 hours) so you can get on with making something great. Don't worry about picking the perfect project - remember that you will get to do a new, larger Capstone project very soon!
-
-* **Your Jupyter Notebook should demonstrate an iterative approach to modeling.** This means that you begin with a basic model, evaluate it, and then provide justification for and proceed to a new model. This is a great way to add narrative structure to your notebook, especially if you compare model performance across each iteration.
-
-* **You must choose and implement an appropriate validation strategy.** This is one of the trickiest parts of machine learning models, especially for models that don't lend themselves easily to traditional cross-validation (e.g. time series & recommendation systems).
-
-## Getting Started
-
-Create a new repository for your project to get started. We recommend structuring your project repository similar to the structure in [the Phase 1 Project Template](https://github.com/learn-co-curriculum/dsc-project-template). You can do this either by creating a new fork of that repository to work in or by building a new repository from scratch that mimics that structure.
-
-## Project Submission and Review
-
-Review the "Project Submission & Review" page in the "Milestones Instructions" topic to learn how to submit your project and how it will be reviewed. Your project must pass review for you to progress to the next Phase.
-
-## Summary
-
-This project is your chance to show off your data science prowess with some advanced machine learning algorithms. Now that you've gone through all of the core course content, we're excited to see what you are able to do!
+https://www.wikidoc.org/index.php/Pneumonia_chest_x_ray 
+https://en.wikipedia.org/wiki/Pneumonia 
+https://en.wikipedia.org/wiki/Artificial_neural_network 
+https://www.analyticsvidhya.com/blog/2020/10/create-image-classification-model-python-keras/ 
+https://gist.github.com/RyanAkilos/3808c17f79e77c4117de35aa68447045
+https://datascience.stackexchange.com/questions/29719/how-to-set-batch-size-steps-per-epoch-and-validation-steps
+https://towardsdatascience.com/image-data-generators-in-keras-7c5fc6928400
+ttps://www.analyticsvidhya.com/blog/2020/08/top-4-pre-trained-models-for-image-classification-with-python-code/ 
