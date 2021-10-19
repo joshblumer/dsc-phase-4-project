@@ -6,7 +6,7 @@ Image Classification with Deep Learning
 
 For my Flatiron School Phase 4 Project I will be classifying x-ray images of pediatric patients to determine whether they have pneumonia or not. Pneumonia is an imflammatory condition in the lungs that affects small air sacs known as alveoli. Pneumonia can be caused by viruses, bacteria, and occasionaly other microorganisms such as fungi and parasites. Symptoms typically include cough, chest pain, fever, and difficulty breathing. Pneumonia affects everyone differently, but children, the elderly, and those with pre existing health conditions are the most at risk. Diagnosing pneumonia using traditional physical exams can be difficult so chest x-rays are commonly used, but interpreting chest x-rays can be difficult as well due to the the locality and severity of the case determining whether it is distinguishable by the naked eye or not. Pneumonia affects roughly 450 million people globally per year and results in around 4 million deaths per year. Antibiotics and vaccines have greatly improved survival rates, but pneumonia is still considered a leading cause of death in many developing countries. The economic costs associated with pneumonia are debated with estimates ranging from $27 billion per year globally, up to almost $20 billion per year just in the United States. The average hospital charges for treating pneumonia in the US are around $25,000 and as high as $125,000, and the average emergency room visit for pneumonia costs $950. A robust deep learning model that can classify x-rays with high accuracy has many potentially beneficial applications. To medical personal in assisting to diagnose pneumonia cases, it could reduce their time spent analyzing radiographic images. To patients, as an earlier diagnosis may lead to an improved outcome and less time sick. And also to hospital administrators and insurance companies, as detecting and treating pneumonia cases earlier and more efficiently could save lives, time, and resources. 
 
-The data used for this project was collected and made available by Kermany et all via [Mendeley Data] (https://data.mendeley.com/datasets/rscbjbr9sj/3) and was downloaded from [Kaggle]. (https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia)
+The data used for this project was collected and made available by Kermany et all via [Mendeley Data](https://data.mendeley.com/datasets/rscbjbr9sj/3) and was downloaded from [Kaggle](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia)
 
 ## Technologies
 * The data cleaning, organizing, and modeling for this project can be found in the jupyter notebook titled "Phase4Project", it is located in this page's repo and was created using Python 3.7.6
@@ -14,15 +14,15 @@ The data used for this project was collected and made available by Kermany et al
 
 ### Necessary libraries to reproduce and run this project are:
 
-*OS
-*CV2
-*Pandas
-*NumPy
-*MatPlotLib
-*Seaborn
-*SKLearn
-*Keras
-*Tensorflow
+* OS
+* CV2
+* Pandas
+* NumPy
+* MatPlotLib
+* Seaborn
+* SKLearn
+* Keras
+* Tensorflow
 
 ## Objectives
 
@@ -43,10 +43,10 @@ The convolutional neural network will take a training collection (images pre-lab
 
 ## Table of Contents
 
-*[Exploratory Data Analysis](#EDA)
-*[Preprocessing](#Process)
-*[Modeling](#Models)
-*[Conclusions](#End)
+* [Exploratory Data Analysis](#EDA)
+* [Preprocessing](#Process)
+* [Modeling](#Models)
+* [Conclusions](#End)
 
 <a name="EDA"></a> 
 ### Exploratory Data Analysis
@@ -102,4 +102,4 @@ https://www.analyticsvidhya.com/blog/2020/10/create-image-classification-model-p
 https://gist.github.com/RyanAkilos/3808c17f79e77c4117de35aa68447045
 https://datascience.stackexchange.com/questions/29719/how-to-set-batch-size-steps-per-epoch-and-validation-steps
 https://towardsdatascience.com/image-data-generators-in-keras-7c5fc6928400
-ttps://www.analyticsvidhya.com/blog/2020/08/top-4-pre-trained-models-for-image-classification-with-python-code/ 
+https://www.analyticsvidhya.com/blog/2020/08/top-4-pre-trained-models-for-image-classification-with-python-code/ 
