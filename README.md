@@ -117,11 +117,11 @@ This project was a great introduction to neural networks and image classificatio
 <a name="Resource"></a>
 ## Resources
 
-https://www.wikidoc.org/index.php/Pneumonia_chest_x_ray 
-https://en.wikipedia.org/wiki/Pneumonia 
-https://en.wikipedia.org/wiki/Artificial_neural_network 
-https://www.analyticsvidhya.com/blog/2020/10/create-image-classification-model-python-keras/ 
-https://gist.github.com/RyanAkilos/3808c17f79e77c4117de35aa68447045
-https://datascience.stackexchange.com/questions/29719/how-to-set-batch-size-steps-per-epoch-and-validation-steps
-https://towardsdatascience.com/image-data-generators-in-keras-7c5fc6928400
-https://www.analyticsvidhya.com/blog/2020/08/top-4-pre-trained-models-for-image-classification-with-python-code/ 
+* https://www.wikidoc.org/index.php/Pneumonia_chest_x_ray 
+* https://en.wikipedia.org/wiki/Pneumonia 
+* https://en.wikipedia.org/wiki/Artificial_neural_network 
+* https://www.analyticsvidhya.com/blog/2020/10/create-image-classification-model-python-keras/ 
+* https://gist.github.com/RyanAkilos/3808c17f79e77c4117de35aa68447045
+* https://datascience.stackexchange.com/questions/29719/how-to-set-batch-size-steps-per-epoch-and-validation-steps
+* https://towardsdatascience.com/image-data-generators-in-keras-7c5fc6928400
+* https://www.analyticsvidhya.com/blog/2020/08/top-4-pre-trained-models-for-image-classification-with-python-code/ 
